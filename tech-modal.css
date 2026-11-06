@@ -7,11 +7,11 @@ body.lock{overflow:hidden}
 .modal{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:20px}
 .modal[hidden]{display:none}
 .m-back{position:absolute;inset:0;background:rgba(3,6,14,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);transition:background .45s ease,backdrop-filter .45s ease}
-.modal.show .m-back{background:rgba(3,6,14,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.modal.show .m-back{background:rgba(15,23,42,.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 
 .m-card{position:relative;width:min(560px,100%);max-height:90vh;overflow:auto;padding:40px 38px 36px;border-radius:24px;border:1px solid rgba(34,211,238,.35);outline:none;
-  background:linear-gradient(160deg,rgba(34,211,238,.10),rgba(139,92,246,.14)),#0e1426;
-  box-shadow:0 40px 100px -20px rgba(0,0,0,.8),0 0 80px -30px var(--c1);
+  background:linear-gradient(160deg,rgba(34,211,238,.10),rgba(139,92,246,.14)),#ffffff;
+  box-shadow:0 40px 100px -20px rgba(76,29,149,.35),0 0 80px -30px var(--c1);
   opacity:0;transform:translateY(40px) scale(.94);transition:opacity .45s ease,transform .55s cubic-bezier(.2,.9,.3,1.15)}
 .modal.show .m-card{opacity:1;transform:none}
 
@@ -31,6 +31,6 @@ body.lock{overflow:hidden}
 .m-desc{color:var(--tx);opacity:.85;margin-bottom:22px}
 .m-card h4{font:600 .8rem Inter;letter-spacing:.14em;text-transform:uppercase;color:var(--c1);margin-bottom:12px}
 .m-card .checks{margin-bottom:28px}
-.m-x{position:absolute;top:16px;right:18px;width:38px;height:38px;border-radius:50%;border:1px solid var(--bd);background:rgba(255,255,255,.05);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer;transition:.3s;opacity:1!important;transform:none}
+.m-x{position:absolute;top:16px;right:18px;width:38px;height:38px;border-radius:50%;border:1px solid var(--bd);background:#f3f6ff;color:var(--tx);font-size:1.4rem;line-height:1;cursor:pointer;transition:.3s;opacity:1!important;transform:none}
 .m-x:hover{border-color:var(--c1);transform:rotate(90deg)}
 @media (prefers-reduced-motion:reduce){.m-card,.m-card>*,.m-back{transition:none}}

@@ -12,7 +12,7 @@
   var ctx = cv.getContext('2d'), W = 0, H = 0, dpr = 1, mouse = { x: -999, y: -999 }, visible = true, t0 = performance.now();
 
   var small = window.innerWidth < 900 || (window.matchMedia && matchMedia('(hover:none)').matches), lastT = 0;
-  var C1 = '34,211,238', C2 = '139,92,246';
+  var C1 = '8,145,178', C2 = '124,58,237';
   function rgba(c, a) { return 'rgba(' + c + ',' + a + ')'; }
   function rnd(a, b) { return a + Math.random() * (b - a); }
 
@@ -198,4 +198,14 @@
   hero.addEventListener('mouseleave', function () { mouse.x = mouse.y = -999; });
   if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(hero);
   if (reduce) { sc.draw(3000); } else requestAnimationFrame(frame);
+})();
+
+// contact hero: chat bubbles + paper plane (context: "get in touch")
+(function () {
+  var h = document.querySelector('.page-hero[data-scene="pulse"]');
+  if (!h) return;
+  var d = document.createElement('div');
+  d.className = 'ph-msg'; d.setAttribute('aria-hidden', 'true');
+  d.innerHTML = '<svg viewBox="0 0 24 24"><path d="M21 3 3 10.5l7 3 3 7z"/><path d="M10 13.5 21 3"/></svg><div class="b"><i></i><i></i><i></i></div><div class="b r"><i></i><i></i><i></i></div>';
+  h.appendChild(d);
 })();
