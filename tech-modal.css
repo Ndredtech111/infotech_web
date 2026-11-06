@@ -1,0 +1,36 @@
+/* technology tiles are clickable + pop-up */
+.tile{cursor:pointer;padding-bottom:34px}
+.tile em{position:absolute;bottom:10px;font-style:normal;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--c1);opacity:0;transform:translateY(6px);transition:.35s}
+.tile:hover em,.tile:focus-visible em{opacity:1;transform:none}
+body.lock{overflow:hidden}
+
+.modal{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:20px}
+.modal[hidden]{display:none}
+.m-back{position:absolute;inset:0;background:rgba(3,6,14,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);transition:background .45s ease,backdrop-filter .45s ease}
+.modal.show .m-back{background:rgba(3,6,14,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+
+.m-card{position:relative;width:min(560px,100%);max-height:90vh;overflow:auto;padding:40px 38px 36px;border-radius:24px;border:1px solid rgba(34,211,238,.35);outline:none;
+  background:linear-gradient(160deg,rgba(34,211,238,.10),rgba(139,92,246,.14)),#0e1426;
+  box-shadow:0 40px 100px -20px rgba(0,0,0,.8),0 0 80px -30px var(--c1);
+  opacity:0;transform:translateY(40px) scale(.94);transition:opacity .45s ease,transform .55s cubic-bezier(.2,.9,.3,1.15)}
+.modal.show .m-card{opacity:1;transform:none}
+
+/* staggered content reveal */
+.m-card>*{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.modal.show .m-card>*{opacity:1;transform:none}
+.modal.show .m-card>:nth-child(3){transition-delay:.12s}
+.modal.show .m-card>:nth-child(4){transition-delay:.17s}
+.modal.show .m-card>:nth-child(5){transition-delay:.22s}
+.modal.show .m-card>:nth-child(6){transition-delay:.27s}
+.modal.show .m-card>:nth-child(7){transition-delay:.32s}
+.modal.show .m-card>:nth-child(8){transition-delay:.37s}
+.modal.show .m-card>:nth-child(9){transition-delay:.42s}
+
+.m-ic svg.li{width:56px;height:56px;margin-bottom:14px;stroke:var(--c1)}
+.m-card h3{font-size:2rem;margin-bottom:12px}
+.m-desc{color:var(--tx);opacity:.85;margin-bottom:22px}
+.m-card h4{font:600 .8rem Inter;letter-spacing:.14em;text-transform:uppercase;color:var(--c1);margin-bottom:12px}
+.m-card .checks{margin-bottom:28px}
+.m-x{position:absolute;top:16px;right:18px;width:38px;height:38px;border-radius:50%;border:1px solid var(--bd);background:rgba(255,255,255,.05);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer;transition:.3s;opacity:1!important;transform:none}
+.m-x:hover{border-color:var(--c1);transform:rotate(90deg)}
+@media (prefers-reduced-motion:reduce){.m-card,.m-card>*,.m-back{transition:none}}
