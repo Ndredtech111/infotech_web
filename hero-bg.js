@@ -11,12 +11,13 @@
   hero.insertBefore(cv, hero.firstChild);
   var ctx = cv.getContext('2d'), W = 0, H = 0, dpr = 1, mouse = { x: -999, y: -999 }, visible = true, t0 = performance.now();
 
+  var small = window.innerWidth < 900 || (window.matchMedia && matchMedia('(hover:none)').matches), lastT = 0;
   var C1 = '34,211,238', C2 = '139,92,246';
   function rgba(c, a) { return 'rgba(' + c + ',' + a + ')'; }
   function rnd(a, b) { return a + Math.random() * (b - a); }
 
   function size() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    dpr = small ? 1 : Math.min(window.devicePixelRatio || 1, 2);
     W = hero.clientWidth; H = hero.clientHeight;
     cv.width = W * dpr; cv.height = H * dpr;
     cv.style.width = W + 'px'; cv.style.height = H + 'px';
@@ -30,7 +31,7 @@
   // ---- network: people / nodes connecting (home, talent, about) ----
   scenes.network = {
     init: function () {
-      var n = Math.round(Math.min(70, W * H / 16000));
+      var n = Math.round(Math.min(small ? 28 : 70, W * H / 16000));
       S.p = []; for (var i = 0; i < n; i++) S.p.push({ x: rnd(0, W), y: rnd(0, H), vx: rnd(-.25, .25), vy: rnd(-.25, .25), r: rnd(1.5, 3) });
     },
     draw: function () {
@@ -187,12 +188,12 @@
   function init() { S = {}; sc.init(); }
 
   function frame(now) {
-    if (visible) { ctx.clearRect(0, 0, W, H); sc.draw(now - t0); }
+    if (visible && !document.hidden && (!small || now - lastT > 33)) { lastT = now; ctx.clearRect(0, 0, W, H); sc.draw(now - t0); }
     if (!reduce) requestAnimationFrame(frame);
   }
 
   size();
-  window.addEventListener('resize', size);
+  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(size, 200); });
   hero.addEventListener('mousemove', function (e) { var r = hero.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
   hero.addEventListener('mouseleave', function () { mouse.x = mouse.y = -999; });
   if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(hero);
