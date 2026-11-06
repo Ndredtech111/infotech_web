@@ -71,3 +71,9 @@
   #tl2 .checks li::before,#tl2 .steps.one li::after{scale:1}
   #tl2 .steps.one::before{transform:none}
 }
+
+/* mobile: gentle fade-up only, so stacked cards never overlap mid-animation */
+@media (max-width:900px){
+  #tl1 .card.reveal:nth-child(n){translate:0 24px;rotate:0 1 0 0deg;scale:1}
+  #tl1 .card.reveal.in:nth-child(n){translate:0 0}
+}
