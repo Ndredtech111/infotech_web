@@ -585,3 +585,24 @@ svg.li{width:44px;height:44px;fill:none;stroke:var(--c1);stroke-width:1.4;stroke
   #story .card.reveal{translate:0 24px;rotate:0 1 0 0deg;scale:1}
   #story .card.reveal.in{translate:0 0}
 }
+
+/* ===== iOS / Android compatibility ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:transparent;scroll-padding-top:80px}
+body{overflow-x:hidden;overflow-x:clip;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
+img,svg,video,canvas{max-width:100%}
+a,button,.burger,.flip,.tile{touch-action:manipulation}
+button,.btn,input[type=submit]{-webkit-appearance:none;appearance:none}
+input,select,textarea{-webkit-appearance:none;appearance:none;font-size:16px;border-radius:12px}   /* 16px stops iOS zoom-on-focus */
+.hero{min-height:100vh;min-height:100svh}                                                         /* iOS/Android URL-bar safe */
+.nav{padding-top:env(safe-area-inset-top)}
+.wrap{padding-left:max(clamp(20px,5vw,96px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,96px),env(safe-area-inset-right))}
+.foot{padding-bottom:max(24px,env(safe-area-inset-bottom))}
+.modal{padding:max(20px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(20px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left))}
+.m-card{max-height:90vh;max-height:90dvh;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+@media (max-width:900px){
+  #menu{max-height:calc(100vh - 72px);max-height:calc(100dvh - 72px);overflow-y:auto;-webkit-overflow-scrolling:touch;visibility:hidden;transition:transform .35s,visibility 0s .35s}
+  #menu.open{visibility:visible;transition:transform .35s}
+  .btn{min-height:44px}
+}
+/* browsers without individual transform props: just show content */
+@supports not (translate:0 0){.reveal,.flip.reveal,.card.reveal{opacity:1!important;transition:none!important}}

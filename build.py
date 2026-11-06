@@ -28,7 +28,7 @@ def page(fname, title, desc, h1, lead, body, eyebrow=""):
         f'<a href="{h}"{" aria-current=\"page\"" if h == fname or (fname.startswith("svc-") and h == "services.html") else ""}>{t}</a>'
         for h, t in NAV[1:-1])
     doc = f'''<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{html.escape(title)} | NDR Infotech</title>
 <meta name="description" content="{html.escape(desc)}">
 <meta name="theme-color" content="#070b16">
