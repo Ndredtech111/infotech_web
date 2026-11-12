@@ -38,7 +38,7 @@
     if (io) io.observe(el); else { el.classList.add('in'); el.querySelectorAll('[data-count]').forEach(function (c) { c.textContent = c.dataset.count + (c.dataset.suffix || ''); }); }
   });
 
-  var yr = document.getElementById('yr'); if (yr) yr.textContent = new Date().getFullYear();
+  // copyright year is fixed (2022) in the footer markup
 
   // Contact form: emails the enquiry to the address below via FormSubmit (https://formsubmit.co).
   // First submission triggers a one-time activation email to that inbox; click the link in it to enable delivery.
@@ -78,4 +78,27 @@
       })
       .then(function () { btn.disabled = false; btn.textContent = label; });
   });
+})();
+
+// Fixed date & time widget (bottom-right corner, every page)
+(function () {
+  var w = document.createElement('div');
+  w.className = 'dt-widget';
+  w.setAttribute('role', 'timer');
+  w.setAttribute('aria-label', 'Current date and time');
+  w.innerHTML = '<svg class="dt-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle class="dt-dot" cx="12" cy="15" r="1.6"/></svg>' +
+    '<div class="dt-txt"><span class="dt-date"></span><span class="dt-time"></span></div>';
+  document.body.appendChild(w);
+  var dEl = w.querySelector('.dt-date'), tEl = w.querySelector('.dt-time');
+  var dfmt, tfmt;
+  try {
+    dfmt = new Intl.DateTimeFormat(undefined, { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' });
+    tfmt = new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  } catch (e) { dfmt = tfmt = null; }
+  function tick() {
+    var n = new Date();
+    dEl.textContent = dfmt ? dfmt.format(n) : n.toDateString();
+    tEl.textContent = tfmt ? tfmt.format(n) : n.toLocaleTimeString();
+  }
+  tick(); setInterval(tick, 1000);
 })();

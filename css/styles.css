@@ -756,3 +756,19 @@ section.alt,.alt{background:var(--bg2)}
 .c-tech .c-logo{animation:cLogoIn .9s cubic-bezier(.2,.85,.25,1) both}
 @media (max-width:560px){.c-tech{transform:scale(.86);transform-origin:0 0;margin-bottom:-14px}}
 @media (prefers-reduced-motion:reduce){.c-orbit *{animation:none!important}.c-orbit .rip{opacity:0}.c-orbit .pk{opacity:0}}
+
+/* ===== Date & time widget (fixed, bottom-right) ===== */
+.dt-widget{position:fixed;right:0;top:50%;translate:0 -50%;z-index:45;display:flex;align-items:center;gap:12px;padding:10px 18px 10px 12px;
+  background:rgba(255,255,255,.92);border:1px solid var(--bd);border-radius:16px 0 0 16px;border-right:0;box-shadow:0 10px 30px -12px rgba(76,29,149,.3);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;line-height:1.25;pointer-events:none;user-select:none;
+  animation:dtIn .8s cubic-bezier(.2,.85,.25,1) .6s both}
+.dt-widget::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:2px;background:linear-gradient(var(--c1),var(--c2))}
+.dt-ic{width:30px;height:30px;fill:none;stroke:var(--c1);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin-left:6px}
+.dt-dot{fill:var(--c2);stroke:none;animation:dtPulse 1s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.dt-txt{display:flex;flex-direction:column}
+.dt-date{font-size:.72rem;letter-spacing:.04em;color:var(--mu);text-transform:uppercase}
+.dt-time{font-size:1.05rem;font-weight:700;color:var(--tx);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+@keyframes dtIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes dtPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+@media (max-width:900px){.dt-widget{display:none}}
+@media (prefers-reduced-motion:reduce){.dt-widget,.dt-dot{animation:none}}
