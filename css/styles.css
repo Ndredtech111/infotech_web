@@ -577,7 +577,7 @@ svg.li{width:44px;height:44px;fill:none;stroke:var(--c1);stroke-width:1.4;stroke
 /* mobile performance: drop costly blur filters, backdrop blur and endless animations */
 @media (max-width:900px),(hover:none){
   *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
-  .flip,.flip.reveal,.card,.tile,.bt,.bt-bg,.glow,.face,.logo svg,section{filter:none!important}   /* heavy blocks: no blur; headings/text keep their blur-in transition */
+  .flip,.flip.reveal,.card,.tile,.bt,.bt-bg,.glow,.face,.logo-img,section{filter:none!important}   /* heavy blocks: no blur; headings/text keep their blur-in transition */
   .glow{display:none}
   .bt-bg *,.ch-hint span{animation:none!important}
   .nav.solid{background:rgba(255,255,255,.98)}
@@ -619,7 +619,7 @@ section.alt,.alt{background:var(--bg2)}
 ::selection{background:rgba(124,58,237,.25)}
 
 /* logo animation: icon pops in + glows, "Infotech" gradient flows */
-.logo svg{animation:logoIn .9s cubic-bezier(.2,.85,.25,1) both,logoGlow 3.2s ease-in-out 1s infinite}
+.logo-img{animation:logoIn .9s cubic-bezier(.2,.85,.25,1) both,logoGlow 3.2s ease-in-out 1s infinite}
 .logo:hover svg{transform:rotate(-8deg) scale(1.08);transition:transform .35s}
 .logo b{background-image:linear-gradient(90deg,var(--c1),var(--c2),var(--c1));background-size:200% 100%;animation:logoFlow 4s linear infinite}
 .logo>span{animation:logoText .8s ease .25s both}
@@ -627,7 +627,7 @@ section.alt,.alt{background:var(--bg2)}
 @keyframes logoGlow{0%,100%{filter:drop-shadow(0 0 0 rgba(124,58,237,0))}50%{filter:drop-shadow(0 4px 10px rgba(124,58,237,.45))}}
 @keyframes logoFlow{0%{background-position:0 0}100%{background-position:-200% 0}}
 @keyframes logoText{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.logo svg,.logo b,.logo>span{animation:none}}
+@media (prefers-reduced-motion:reduce){.logo-img,.logo b,.logo>span{animation:none}}
 
 /* ===== Context-aware hero text transitions (by page scene) ===== */
 .page-hero .eyebrow,.page-hero h1,.page-hero .lead{animation-fill-mode:both;animation-timing-function:cubic-bezier(.2,.85,.25,1)}
@@ -682,3 +682,77 @@ section.alt,.alt{background:var(--bg2)}
 @keyframes phFlow{from{opacity:0;transform:translateX(-80px) skewX(-8deg)}to{opacity:1;transform:none}}
 @keyframes phLoop{from{opacity:0;transform:rotate(-8deg) translateY(30px)}to{opacity:1;transform:none}}
 @keyframes phSweep{from{opacity:0;clip-path:circle(0% at 0 50%)}to{opacity:1;clip-path:circle(150% at 0 50%)}}
+
+/* wealth page */
+.wsteps{grid-template-columns:repeat(5,1fr)}
+@media (max-width:1100px){.wsteps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:700px){.wsteps{grid-template-columns:1fr}}
+.faq{display:grid;gap:12px}
+.faq details{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:16px 20px;box-shadow:var(--sh);transition:border-color .3s,box-shadow .3s}
+.faq details[open]{border-color:var(--c2)}
+.faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--c2);font-size:1.4rem;line-height:1;transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--mu);margin-top:10px;animation:phSlideR .4s both}
+
+/* ===== Compact "terminal" call-to-action band (all pages) ===== */
+.cta-band.sec{padding:44px 0;text-align:left}
+.cta-band::before,.cta-band::after{display:none!important}
+.cta-band .wrap{position:relative;width:min(1100px,calc(100% - 40px));max-width:none;margin:0 auto;padding:26px 36px 28px 40px;
+  display:grid;grid-template-columns:1fr auto;grid-template-areas:"p b" "h b" "m b";column-gap:32px;row-gap:4px;align-items:center;
+  background:#fff;border:1px solid var(--bd);border-radius:20px;box-shadow:var(--sh);overflow:hidden;
+  background-image:radial-gradient(circle,rgba(8,145,178,.20) 1px,transparent 1.5px),linear-gradient(#fff,#fff);background-size:18px 18px,auto;background-position:right top,0 0;
+  -webkit-mask:none;mask:none}
+.cta-band .wrap::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--c1),var(--c2))}
+.cta-band .wrap::before{content:"$ ndr --start-project";grid-area:p;justify-self:start;display:inline-block;font:600 .78rem ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.04em;color:var(--c1);border-right:2px solid var(--c2);padding-right:6px;animation:ctaCaret 1s step-end infinite}
+.cta-band h2{grid-area:h;font-size:clamp(1.3rem,2.4vw,1.8rem)}
+.cta-band .muted{grid-area:m;margin:0;font-size:.95rem}
+.cta-band .btn{grid-area:b;justify-self:end;white-space:nowrap}
+.cta-band .wrap>*{position:relative;z-index:1}
+@keyframes ctaCaret{50%{border-color:transparent}}
+@media (max-width:700px){
+  .cta-band .wrap{grid-template-columns:1fr;grid-template-areas:"p" "h" "m" "b";padding:24px 22px 24px 26px;row-gap:6px}
+  .cta-band .btn{justify-self:start;margin-top:12px}
+}
+@media (prefers-reduced-motion:reduce){.cta-band .wrap::before{animation:none}}
+
+/* brand logo image */
+.logo-img{height:54px;width:auto;display:block;object-fit:contain}
+.logo{gap:12px}
+
+@media (max-width:700px){.logo-img{height:46px}}
+
+/* rounded logo badge (contact) */
+.c-logo{position:relative;width:128px;height:128px;border-radius:50%;background:#fff;border:1px solid var(--bd);box-shadow:var(--sh),0 0 0 6px rgba(8,145,178,.06);display:grid;place-items:center;margin-bottom:26px;animation:cLogoIn .9s cubic-bezier(.2,.85,.25,1) both}
+.c-logo img{width:auto;height:92px;display:block}
+.c-logo::before{content:"";position:absolute;inset:-9px;border-radius:50%;border:1.5px dashed rgba(124,58,237,.45);animation:cLogoSpin 18s linear infinite}
+.c-logo::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid transparent;border-top-color:var(--c1);animation:cLogoSpin 4s linear infinite}
+@keyframes cLogoIn{from{opacity:0;transform:scale(.6) rotate(-20deg)}to{opacity:1;transform:none}}
+@keyframes cLogoSpin{to{transform:rotate(360deg)}}
+.btn.ghost{margin-top:18px}
+@media (prefers-reduced-motion:reduce){.c-logo,.c-logo::before,.c-logo::after{animation:none}}
+
+/* techie orbit around the contact logo */
+.c-tech{position:relative;width:212px;height:212px;margin:-8px 0 14px -14px}
+.c-tech .c-logo{position:absolute;left:50%;top:50%;margin:0;translate:-50% -50%}
+.c-orbit{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.c-orbit *{transform-box:view-box;transform-origin:0 0;fill:none}
+.c-orbit .tk{stroke:var(--c2);stroke-width:3;stroke-dasharray:1.2 6.1;opacity:.55;animation:cSpin 40s linear infinite}
+.c-orbit .dd{stroke:var(--c1);stroke-width:1;stroke-dasharray:14 9;opacity:.5;animation:cSpin 26s linear infinite reverse}
+.c-orbit .tr{stroke:var(--c1);stroke-width:1.1;opacity:.35;stroke-linejoin:round}
+.c-orbit .pk{stroke:var(--c2);stroke-width:1.8;stroke-linecap:round;stroke-dasharray:5 60;stroke-dashoffset:65;animation:cPacket 3.2s ease-in-out infinite}
+.c-orbit .nd{stroke:var(--c1);stroke-width:1.2;fill:#fff;animation:cNode 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.c-orbit .orb circle{fill:var(--c1)}
+.c-orbit .o1{animation:cSpin 9s linear infinite}
+.c-orbit .o2{animation:cSpin 14s linear infinite reverse}.c-orbit .o2 circle{fill:var(--c2)}
+.c-orbit .o3{animation:cSpin 6s linear infinite}.c-orbit .o3 circle{fill:var(--c2);opacity:.8}
+.c-orbit .rip{stroke:var(--c1);stroke-width:1.2;opacity:0;animation:cRipple 4.5s ease-out infinite}
+.c-orbit .r2{animation-delay:1.5s}.c-orbit .r3{animation-delay:3s}
+@keyframes cSpin{to{transform:rotate(360deg)}}
+@keyframes cPacket{0%{stroke-dashoffset:65;opacity:0}15%{opacity:1}70%{stroke-dashoffset:-12;opacity:1}100%{stroke-dashoffset:-12;opacity:0}}
+@keyframes cNode{0%,100%{transform:scale(1);stroke:var(--c1)}50%{transform:scale(1.6);stroke:var(--c2)}}
+@keyframes cRipple{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.55);opacity:0}}
+.c-tech .c-logo{animation:cLogoIn .9s cubic-bezier(.2,.85,.25,1) both}
+@media (max-width:560px){.c-tech{transform:scale(.86);transform-origin:0 0;margin-bottom:-14px}}
+@media (prefers-reduced-motion:reduce){.c-orbit *{animation:none!important}.c-orbit .rip{opacity:0}.c-orbit .pk{opacity:0}}

@@ -1,0 +1,82 @@
+/* =========== Services page: extra sections + scroll entrances =========== */
+:root{--ease:cubic-bezier(.2,.85,.25,1)}
+
+/* shared heading entrance */
+.xsec .head.reveal,.xsec .two>.reveal{opacity:1;transform:none;transition:none}
+.xsec .eyebrow{opacity:0;letter-spacing:.5em;transition:opacity .9s ease,letter-spacing 1.2s var(--ease)}
+.xsec .head.in .eyebrow,.xsec .in .eyebrow{opacity:1;letter-spacing:.16em}
+.xsec .w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .04em .14em;margin-bottom:-.14em}
+.xsec .w>span{display:inline-block;transform:translateY(115%) rotate(4deg);transform-origin:0 100%;opacity:0;transition:transform 1s var(--ease),opacity .8s ease;transition-delay:calc(var(--i)*.07s + .15s)}
+.xsec .head.in .w>span,.xsec .in .w>span{transform:none;opacity:1}
+.xsec .head .muted{opacity:0;translate:0 14px;transition:opacity .8s ease .5s,translate .8s var(--ease) .5s}
+.xsec .head.in .muted{opacity:1;translate:0 0}
+.xsec .two>.reveal>p{opacity:0;translate:0 18px;transition:opacity .8s ease .6s,translate .8s var(--ease) .6s}
+.xsec .two>.reveal.in>p{opacity:1;translate:0 0}
+
+/* 1 Why choose us: four cards slide in from the right, one by one */
+#x1 .cards-s .card.reveal{opacity:0;transform:none;translate:60px 0;transition:opacity .8s ease var(--d,0s),translate .9s var(--ease) var(--d,0s),border-color .3s,box-shadow .3s}
+#x1 .cards-s .card.reveal.in{opacity:1;translate:0 0}
+#x1 .card:nth-child(1){--d:.1s}#x1 .card:nth-child(2){--d:.25s}#x1 .card:nth-child(3){--d:.4s}#x1 .card:nth-child(4){--d:.55s}
+
+/* shared thin-line icon draw-on */
+.xsec .card svg.li{stroke-dasharray:220;stroke-dashoffset:220;opacity:.2;transition:stroke-dashoffset 1.6s ease calc(var(--d,0s) + .5s),opacity .8s ease calc(var(--d,0s) + .4s),transform .4s ease,stroke .3s}
+.xsec .card.in svg.li{stroke-dashoffset:0;opacity:1}
+.xsec .card:hover svg.li{stroke:var(--c2);transform:translateY(-3px) scale(1.08) rotate(-4deg);animation:draw .9s ease}
+.xsec .card:hover,.xsec .card:focus-within{border-color:rgba(139,92,246,.6);background:linear-gradient(160deg,rgba(139,92,246,.14),rgba(8,145,178,.06)),#fff;box-shadow:0 18px 40px -14px rgba(124,58,237,.35)}
+
+/* 2 More services: 3x3 grid, cards pop up in a wave */
+.xgrid .card.reveal{opacity:0;transform:none;translate:0 70px;scale:.92;transition:opacity .8s ease var(--d,0s),translate .9s var(--ease) var(--d,0s),scale .9s var(--ease) var(--d,0s),border-color .3s,box-shadow .3s,background .3s}
+.xgrid .card.reveal.in{opacity:1;translate:0 0;scale:1}
+.xgrid .card:nth-child(3n+1){--d:.05s}.xgrid .card:nth-child(3n+2){--d:.18s}.xgrid .card:nth-child(3n+3){--d:.31s}
+
+/* 3 Industries: auto-fit grid, cards drop in from the top */
+.xind{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.xind .card.reveal{opacity:0;transform:none;translate:0 -50px;scale:.94;transition:opacity .8s ease var(--d,0s),translate .9s var(--ease) var(--d,0s),scale .9s var(--ease) var(--d,0s),border-color .3s,box-shadow .3s,background .3s}
+.xind .card.reveal.in{opacity:1;translate:0 0;scale:1}
+.xind .card:nth-child(1){--d:.05s}.xind .card:nth-child(2){--d:.12s}.xind .card:nth-child(3){--d:.19s}.xind .card:nth-child(4){--d:.26s}.xind .card:nth-child(5){--d:.33s}.xind .card:nth-child(6){--d:.40s}.xind .card:nth-child(7){--d:.47s}
+
+/* 4 Insurance lifecycle: six numbered steps joined by a line that draws across */
+.xlife{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:l}
+.xlife li{position:relative;background:#fff;border:1px solid var(--bd);border-radius:var(--r);padding:26px 24px;box-shadow:var(--sh);opacity:0;translate:0 50px;transition:opacity .8s ease var(--d,0s),translate .9s var(--ease) var(--d,0s),border-color .3s,box-shadow .3s}
+.xlife.reveal{opacity:1;transform:none;transition:none}
+.xlife.in li{opacity:1;translate:0 0}
+.xlife li:nth-child(1){--d:.05s}.xlife li:nth-child(2){--d:.2s}.xlife li:nth-child(3){--d:.35s}.xlife li:nth-child(4){--d:.5s}.xlife li:nth-child(5){--d:.65s}.xlife li:nth-child(6){--d:.8s}
+.xlife li b{display:inline-block;font:700 2rem Sora;background:linear-gradient(90deg,var(--c1),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:6px}
+.xlife li::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:0;border-radius:0 0 var(--r) var(--r);background:linear-gradient(90deg,var(--c1),var(--c2));transition:width 1s ease calc(var(--d,0s) + .5s)}
+.xlife.in li::after{width:100%}
+.xlife li:hover{border-color:rgba(139,92,246,.6);box-shadow:0 18px 40px -14px rgba(124,58,237,.35);translate:0 -6px}
+.xlife h3{font-size:1.1rem;margin-bottom:8px}.xlife p{color:var(--mu);font-size:.95rem}
+
+/* 5 Small accounts: copy slides in from the left, benefits card from the right */
+#x5 .two>.reveal:first-child{translate:-40px 0;opacity:0;transition:opacity .9s ease,translate 1s var(--ease)}
+#x5 .two>.reveal:first-child.in{opacity:1;translate:0 0}
+#x5 .two>.card.reveal{opacity:0;transform:none;translate:60px 0;scale:.96;transition:opacity .9s ease .2s,translate 1s var(--ease) .2s,scale 1s var(--ease) .2s,border-color .3s,box-shadow .3s}
+#x5 .two>.card.reveal.in{opacity:1;translate:0 0;scale:1}
+#x5 .checks li{opacity:0;translate:-20px 0;transition:opacity .6s ease calc(var(--k,0)*.14s + .7s),translate .7s var(--ease) calc(var(--k,0)*.14s + .7s)}
+#x5 .card.in .checks li{opacity:1;translate:0 0}
+#x5 .checks li:nth-child(1){--k:0}#x5 .checks li:nth-child(2){--k:1}#x5 .checks li:nth-child(3){--k:2}#x5 .checks li:nth-child(4){--k:3}
+
+/* 6 Agency services: 14 compact cards ripple in from the left */
+.xag{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.xag .card{padding:22px}
+.xag .card h3{font-size:1.02rem;margin-bottom:6px}.xag .card p{font-size:.9rem}
+.xag .card.reveal{opacity:0;transform:none;translate:-40px 0;transition:opacity .7s ease calc(var(--k,0)*.05s),translate .8s var(--ease) calc(var(--k,0)*.05s),border-color .3s,box-shadow .3s,background .3s}
+.xag .card.reveal.in{opacity:1;translate:0 0}
+.xag .card:nth-child(1){--k:0}.xag .card:nth-child(2){--k:1}.xag .card:nth-child(3){--k:2}.xag .card:nth-child(4){--k:3}.xag .card:nth-child(5){--k:4}.xag .card:nth-child(6){--k:5}.xag .card:nth-child(7){--k:6}
+.xag .card:nth-child(8){--k:1}.xag .card:nth-child(9){--k:2}.xag .card:nth-child(10){--k:3}.xag .card:nth-child(11){--k:4}.xag .card:nth-child(12){--k:5}.xag .card:nth-child(13){--k:6}.xag .card:nth-child(14){--k:7}
+.xag .card::before{content:"";display:block;width:26px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--c1),var(--c2));margin-bottom:12px;transition:width .4s ease}
+.xag .card:hover::before{width:52px}
+
+@media (max-width:900px){
+  .xlife{grid-template-columns:1fr 1fr}
+  #x1 .cards-s .card.reveal,#x5 .two>.card.reveal,#x5 .two>.reveal:first-child{translate:0 30px}
+  .xag .card.reveal{translate:0 24px}
+}
+@media (max-width:560px){.xlife{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){
+  .xsec .eyebrow,.xsec .w>span,.xsec .head .muted,.xsec .two>.reveal>p,#x1 .cards-s .card.reveal,.xgrid .card.reveal,.xind .card.reveal,.xlife li,#x5 .two>.reveal:first-child,#x5 .two>.card.reveal,#x5 .checks li,.xag .card.reveal{opacity:1!important;translate:0 0!important;scale:1!important;rotate:0deg!important;transform:none!important;transition:none!important}
+  .xsec .eyebrow{letter-spacing:.16em!important}
+  .xsec .card svg.li{stroke-dashoffset:0!important;opacity:1!important}
+  .xlife li::after{width:100%!important;transition:none!important}
+}
+@supports not (translate:0 0){.xgrid .card.reveal,.xind .card.reveal,.xlife li,.xag .card.reveal,#x1 .cards-s .card.reveal{opacity:1}}

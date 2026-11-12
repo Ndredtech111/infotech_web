@@ -1,5 +1,6 @@
-"""Rebuilds the body of index.html (everything after the marquee). Run: python build_home.py"""
-import html
+"""Rebuilds the body of index.html (everything after the marquee). Run: py py/build_home.py"""
+import html, pathlib
+ROOT = pathlib.Path(__file__).resolve().parent.parent
 from icons import svg
 
 CHALLENGES = [
@@ -93,16 +94,16 @@ def bento():
             '<h2>Everything in one place</h2></div><div class="bento">' + cells + '</div></div></section>')
 
 def build():
-    t = open("index.html", encoding="utf-8").read()
+    t = open(ROOT / "index.html", encoding="utf-8").read()
     a = t.index("</section>", t.index('class="marquee"')) + len("</section>")
     b = t.index("</main>")
     body = "\n\n" + challenges() + "\n\n" + statement() + "\n\n" + bento() + "\n"
-    open("index.html", "w", encoding="utf-8").write(t[:a] + body + t[b:])
+    open(ROOT / "index.html", "w", encoding="utf-8").write(t[:a] + body + t[b:])
     # make sure home.js is loaded once
-    t = open("index.html", encoding="utf-8").read()
+    t = open(ROOT / "index.html", encoding="utf-8").read()
     if "home.js" not in t:
-        t = t.replace('<script src="hero-bg.js"></script>', '<script src="hero-bg.js"></script>\n<script src="home.js"></script>', 1)
-        open("index.html", "w", encoding="utf-8").write(t)
+        t = t.replace('<script src="js/hero-bg.js"></script>', '<script src="js/hero-bg.js"></script>\n<script src="js/home.js"></script>', 1)
+        open(ROOT / "index.html", "w", encoding="utf-8").write(t)
 
 if __name__ == "__main__":
     build(); print("home built")

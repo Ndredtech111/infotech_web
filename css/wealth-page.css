@@ -1,0 +1,78 @@
+/* =========== Wealth page: scroll-driven entrances, one style per section =========== */
+.scroll-prog{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--c1),var(--c2));z-index:60;pointer-events:none}
+:root{--ease:cubic-bezier(.2,.85,.25,1)}
+
+/* headings (all sections): eyebrow spreads, words rise */
+#w1 .head.reveal,#w2 .head.reveal,#w3 .head.reveal,#w4 .head.reveal,#w5 .head.reveal,#w5 .two>.reveal{opacity:1;transform:none;transition:none}
+.wsec .eyebrow{opacity:0;letter-spacing:.5em;transition:opacity .9s ease,letter-spacing 1.2s var(--ease)}
+.wsec .head.in .eyebrow,.wsec .in .eyebrow,.wsec .eyebrow.in{opacity:1;letter-spacing:.16em}
+.wsec .w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .04em .14em;margin-bottom:-.14em}
+.wsec .w>span{display:inline-block;transform:translateY(115%) rotate(4deg);transform-origin:0 100%;opacity:0;transition:transform 1s var(--ease),opacity .8s ease;transition-delay:calc(var(--i)*.09s + .15s)}
+.wsec .head.in .w>span,.wsec .in .w>span{transform:none;opacity:1}
+.wsec .head .muted{opacity:0;translate:0 14px;transition:opacity .8s ease .5s,translate .8s var(--ease) .5s}
+.wsec .head.in .muted{opacity:1;translate:0 0}
+
+/* 1 What we provide: cards rise and settle, row by row */
+#w1 .card.reveal{opacity:0;transform:none;translate:0 60px;scale:.92;transition:opacity .8s ease var(--d,0s),translate .9s var(--ease) var(--d,0s),scale .9s var(--ease) var(--d,0s),border-color .3s,box-shadow .3s,background .3s}
+#w1 .card.reveal.in{opacity:1;translate:0 0;scale:1}
+#w1 .card:nth-child(3n+1){--d:.05s}#w1 .card:nth-child(3n+2){--d:.17s}#w1 .card:nth-child(3n+3){--d:.29s}
+#w1 .card:hover{translate:0 -6px}
+
+/* 2 Five steps: line draws across, each step lifts in turn */
+#w2 .steps.reveal{opacity:1;transform:none;transition:none}
+#w2 .steps li{opacity:0;translate:0 44px;transition:opacity .8s ease var(--d,0s),translate .9s var(--ease) var(--d,0s)}
+#w2 .steps.in li{opacity:1;translate:0 0}
+#w2 .steps li::before{transition:width 1s ease var(--d,0s)}
+#w2 .steps.in li::before{width:100%}
+#w2 .steps li:nth-child(1){--d:.05s}#w2 .steps li:nth-child(2){--d:.25s}#w2 .steps li:nth-child(3){--d:.45s}#w2 .steps li:nth-child(4){--d:.65s}#w2 .steps li:nth-child(5){--d:.85s}
+
+/* 3 Stages: slide in from alternating sides */
+#w3 .steps.reveal{opacity:1;transform:none;transition:none}
+#w3 .steps li{opacity:0;transition:opacity .8s ease var(--d,0s),translate .9s var(--ease) var(--d,0s)}
+#w3 .steps li:nth-child(odd){translate:-50px 0}#w3 .steps li:nth-child(even){translate:50px 0}
+#w3 .steps.in li{opacity:1;translate:0 0}
+#w3 .steps li::before{transition:width 1s ease var(--d,0s)}
+#w3 .steps.in li::before{width:100%}
+#w3 .steps li:nth-child(1){--d:.05s}#w3 .steps li:nth-child(2){--d:.2s}#w3 .steps li:nth-child(3){--d:.35s}#w3 .steps li:nth-child(4){--d:.5s}
+
+/* 4 Advisory flips: pop up from below with a slight tilt */
+#w4 .grid3{perspective:1400px}
+#w4 .flip.reveal{opacity:0;transform:none;translate:0 70px;scale:.9;rotate:1 0 0 18deg;transform-origin:50% 100%;transition:opacity .8s ease var(--d,0s),translate .9s var(--ease) var(--d,0s),scale .9s var(--ease) var(--d,0s),rotate .9s var(--ease) var(--d,0s)}
+#w4 .flip.reveal.in{opacity:1;translate:0 0;scale:1;rotate:1 0 0 0deg}
+#w4 .flip:nth-child(3n+1){--d:.05s}#w4 .flip:nth-child(3n+2){--d:.18s}#w4 .flip:nth-child(3n+3){--d:.31s}
+
+/* 5 Why us + FAQ: ticks slide in one by one, FAQ rows stack up */
+#w5 .checks.reveal{opacity:1;transform:none;transition:none}
+#w5 .checks li{opacity:0;translate:-30px 0;transition:opacity .7s ease calc(var(--k,0)*.12s + .2s),translate .8s var(--ease) calc(var(--k,0)*.12s + .2s)}
+#w5 .checks.in li{opacity:1;translate:0 0}
+#w5 .checks li:nth-child(1){--k:0}#w5 .checks li:nth-child(2){--k:1}#w5 .checks li:nth-child(3){--k:2}#w5 .checks li:nth-child(4){--k:3}#w5 .checks li:nth-child(5){--k:4}#w5 .checks li:nth-child(6){--k:5}
+#w5 .faq.reveal{opacity:1;transform:none;transition:none}
+#w5 .faq details{opacity:0;translate:40px 0;transition:opacity .7s ease calc(var(--k,0)*.12s + .3s),translate .8s var(--ease) calc(var(--k,0)*.12s + .3s),border-color .3s}
+#w5 .faq.in details{opacity:1;translate:0 0}
+#w5 .faq details:nth-child(1){--k:0}#w5 .faq details:nth-child(2){--k:1}#w5 .faq details:nth-child(3){--k:2}#w5 .faq details:nth-child(4){--k:3}#w5 .faq details:nth-child(5){--k:4}
+
+/* CTA band */
+#w-cta.reveal{opacity:0;translate:0 50px;scale:.96;transition:opacity .9s ease,translate 1s var(--ease),scale 1s var(--ease)}
+#w-cta.reveal.in{opacity:1;translate:0 0;scale:1}
+
+@media (max-width:900px){
+  #w3 .steps li:nth-child(odd),#w3 .steps li:nth-child(even){translate:0 36px}
+  #w5 .faq details{translate:0 24px}
+}
+@media (prefers-reduced-motion:reduce){
+  .wsec .eyebrow,.wsec .w>span,.wsec .head .muted,#w1 .card.reveal,#w2 .steps li,#w3 .steps li,#w4 .flip.reveal,#w5 .checks li,#w5 .faq details,#w-cta.reveal{opacity:1!important;translate:0 0!important;scale:1!important;rotate:0deg!important;transform:none!important;transition:none!important}
+  .wsec .eyebrow{letter-spacing:.16em!important}
+  .scroll-prog{display:none}
+}
+@supports not (translate:0 0){#w1 .card.reveal,#w2 .steps li,#w3 .steps li,#w4 .flip.reveal,#w5 .checks li,#w5 .faq details,#w-cta.reveal{opacity:1}}
+
+/* thin-line icons: drawn on as each card enters, redrawn on hover */
+#w1 .card svg.li,#w4 .face.front svg.li{stroke-dasharray:220;stroke-dashoffset:220;opacity:.2;transition:stroke-dashoffset 1.6s ease calc(var(--d,0s) + .5s),opacity .8s ease calc(var(--d,0s) + .4s),transform .4s ease,stroke .3s}
+#w1 .card.in svg.li,#w4 .flip.in .face.front svg.li{stroke-dashoffset:0;opacity:1}
+#w1 .card:hover svg.li,#w4 .flip:hover .face.front svg.li{stroke:var(--c2);transform:translateY(-3px) scale(1.08) rotate(-4deg);animation:draw .9s ease}
+#w1 .card.in h3,#w1 .card.in p{animation:phSlideR .7s ease calc(var(--d,0s) + .7s) both}
+@media (prefers-reduced-motion:reduce){#w1 .card svg.li,#w4 .face.front svg.li{stroke-dashoffset:0!important;opacity:1!important}}
+
+/* highlight only on hover/focus */
+#w1 .card{transition:opacity .8s ease var(--d,0s),translate .9s var(--ease) var(--d,0s),scale .9s var(--ease) var(--d,0s),border-color .3s,box-shadow .3s,background .3s}
+#w1 .card:hover,#w1 .card:focus-within{border-color:rgba(139,92,246,.6);background:linear-gradient(160deg,rgba(139,92,246,.16),rgba(8,145,178,.07)),#fff;box-shadow:0 18px 40px -14px rgba(124,58,237,.35)}
