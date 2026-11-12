@@ -76,3 +76,15 @@
 /* highlight only on hover/focus */
 #w1 .card{transition:opacity .8s ease var(--d,0s),translate .9s var(--ease) var(--d,0s),scale .9s var(--ease) var(--d,0s),border-color .3s,box-shadow .3s,background .3s}
 #w1 .card:hover,#w1 .card:focus-within{border-color:rgba(139,92,246,.6);background:linear-gradient(160deg,rgba(139,92,246,.16),rgba(8,145,178,.07)),#fff;box-shadow:0 18px 40px -14px rgba(124,58,237,.35)}
+
+/* FAQ open/close polish */
+.faq details{will-change:height}
+.faq details.is-open{border-color:var(--c2);box-shadow:0 18px 40px -16px rgba(124,58,237,.35)}
+.faq details.is-open summary{color:var(--c2)}
+.faq details>p{opacity:0;translate:0 -10px;transition:opacity .35s ease .08s,translate .45s cubic-bezier(.2,.85,.25,1) .05s;animation:none!important}
+.faq details.is-open>p{opacity:1;translate:0 0}
+.faq details.closing>p{opacity:0;translate:0 -10px;transition-delay:0s}
+.faq summary::after{transition:transform .4s cubic-bezier(.2,.85,.25,1),color .3s}
+.faq details.is-open summary::after{transform:rotate(135deg)}
+.faq details[open]:not(.is-open) summary::after{transform:none}
+@media (prefers-reduced-motion:reduce){.faq details>p{transition:none;opacity:1;translate:0 0}}
