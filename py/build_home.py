@@ -28,7 +28,7 @@ BENTO = [
  ("big", "services.html", "orbit", "Services", "Cloud, data, development, migration, DevOps and consulting delivered by one accountable team.", "Explore services"),
  ("", "technologies.html", "layers", "Technologies", "The tools and platforms we work with, and how we use them.", "See the stack"),
  ("", "talent.html", "team", "On-demand talent", "Staff augmentation, dedicated teams and fixed-scope projects.", "Hire talent"),
- ("w2", "about.html", "target", "About NDR", "Twenty-plus years of delivery from Bangalore.", "Our story"),
+ ("w2", "about.html", "target", "About NDR", "A long record of delivery from Bangalore.", "Our story"),
 ]
 
 

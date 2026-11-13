@@ -182,11 +182,11 @@ def build_services():
          "IT solutions &amp; <span class=\"grad\">business services</span>", "Core capability areas, specialist services and insurance operations, delivered by one accountable team.",
          sec(why, alt=True) +
          sec(head("Capabilities", "What we do") + grid) +
-         sec(head("More services", "Specialist services around your technology", "Nine ways we support your teams, from AI to training to day-to-day operations.") + more, alt=True) +
-         sec(head("Industries", "Where we apply it", "Seven sectors where our teams have experience, plus any organisation modernising legacy systems.") + industries) +
-         sec(head("Insurance processing", "Commercial &amp; personal lines, from application to policy", "Six steps of the policy lifecycle that we handle for agencies.") + life, alt=True) +
+         sec(head("More services", "Specialist services around your technology", "Practical ways we support your teams, from AI to training to day-to-day operations.") + more, alt=True) +
+         sec(head("Industries", "Where we apply it", "Sectors where our teams have deep experience, plus any organisation modernising legacy systems.") + industries) +
+         sec(head("Insurance processing", "Commercial &amp; personal lines, from application to policy", "The policy lifecycle that we handle for agencies, step by step.") + life, alt=True) +
          sec(sam) +
-         sec(head("Services for agencies", "Brokers, MGAs &amp; carriers", "Fourteen operational services that take routine work off your team's desk.") + agency, alt=True),
+         sec(head("Services for agencies", "Brokers, MGAs &amp; carriers", "Operational services that take routine work off your team's desk.") + agency, alt=True),
          "Services")
     p = OUT / "services.html"
     d = p.read_text(encoding="utf-8")
@@ -209,10 +209,10 @@ def build_services():
 
 # ---------------- About ----------------
 def build_about():
-    page("about.html", "About Us", "NDR Infotech is a Bangalore-based product development, software services, financial services and technology consulting company with over 20 years of experience.",
+    page("about.html", "About Us", "NDR Infotech is a Bangalore-based product development, software services, financial services and technology consulting company with deep, long-standing experience.",
          "Engineering that <span class=\"grad\">earns trust</span>", "A focused product development, software services and technology consulting company based in Bangalore.",
-         sec('<div class="two"><div class="reveal">' + head("Our story", "Two decades of delivery") +
-             '<p>NDR Infotech has handled projects for over two decades, from requirement gathering through to handover. We combine strategy, analytics and engineering depth to turn ideas into dependable products.</p>'
+         sec('<div class="two"><div class="reveal">' + head("Our story", "A long record of delivery") +
+             '<p>NDR Infotech has handled projects for many years, from requirement gathering through to handover. We combine strategy, analytics and engineering depth to turn ideas into dependable products.</p>'
              '<p>We help enterprises move away from costly legacy development tools to modern platforms, and we stay accountable long after go-live.</p></div>'
              '<div class="cards-s">' + "".join(f'<div class="card reveal"><h3>{t}</h3><p>{d}</p></div>' for t, d in
               [("Mission", "Empowering businesses for excellence through practical, well-engineered technology."),
@@ -362,7 +362,7 @@ def build_wealth():
     page("wealth.html", "Wealth Management & Financial Planning", "Complete financial planning from NDR Infotech: goal-based investment advice, tax planning, retirement, estate and corporate advisory.",
          "Complete <span class=\"grad\">financial planning</span>, in one place", "Investment advice, tax saving, goals and loans, planned around you and reviewed as your life changes.",
          sec(head("What we provide", "Everything your money needs", "One team for planning, investing, protecting and growing your wealth.") + provide) +
-         sec(head("Our process", "Five steps to your financial plan") + steps, alt=True) +
+         sec(head("Our process", "Your path to a financial plan") + steps, alt=True) +
          sec(head("Our stages", "How we work with you", "From the first questionnaire to ongoing reviews.") + stages) +
          sec(head("Advisory services", "Services for every stage of life", "Hover or tap a card to read more.") + advisory, alt=True) +
          sec('<div class="two"><div class="reveal">' + head("Why NDR", "A plan built around you") + why + '</div><div class="reveal">' + head("FAQ", "Common questions") + faq + '</div></div>') +
@@ -370,7 +370,7 @@ def build_wealth():
          "Wealth management")
     p = OUT / "wealth.html"
     t = p.read_text(encoding="utf-8")
-    for n, g in enumerate(["Everything your money needs", "Five steps to your financial plan", "How we work with you", "Services for every stage of life", "A plan built around you"], 1):
+    for n, g in enumerate(["Everything your money needs", "Your path to a financial plan", "How we work with you", "Services for every stage of life", "A plan built around you"], 1):
         k = t.index(f"<h2>{g}</h2>")
         a = t.rindex('<section class="sec', 0, k)
         e = t.index(">", a)

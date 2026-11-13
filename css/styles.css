@@ -730,7 +730,7 @@ section.alt,.alt{background:var(--bg2)}
 .c-logo::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid transparent;border-top-color:var(--c1);animation:cLogoSpin 4s linear infinite}
 @keyframes cLogoIn{from{opacity:0;transform:scale(.6) rotate(-20deg)}to{opacity:1;transform:none}}
 @keyframes cLogoSpin{to{transform:rotate(360deg)}}
-.btn.ghost{margin-top:18px}
+.two .btn.ghost{margin-top:18px}
 @media (prefers-reduced-motion:reduce){.c-logo,.c-logo::before,.c-logo::after{animation:none}}
 
 /* techie orbit around the contact logo */
@@ -772,3 +772,10 @@ section.alt,.alt{background:var(--bg2)}
 @keyframes dtPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
 @media (max-width:900px){.dt-widget{display:none}}
 @media (prefers-reduced-motion:reduce){.dt-widget,.dt-dot{animation:none}}
+
+/* hero buttons: same height, aligned on one line */
+.cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.cta .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;margin:0;line-height:1;white-space:nowrap}
+.btn.ghost{border:0;background:#fff;box-shadow:inset 0 0 0 1px var(--bd),0 10px 24px -12px rgba(76,29,149,.25)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1px var(--c1),0 14px 28px -12px rgba(8,145,178,.4)}
+@media (max-width:480px){.cta .btn{flex:1 1 100%}}
