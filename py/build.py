@@ -278,10 +278,11 @@ def build_contact():
 <a class="btn ghost" href="https://www.google.com/maps/place/NDR+INFOTECH/@12.9134507,77.6048044,1069m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3bae15682da3fe69:0x737fbd1a094a2ebf!8m2!3d12.9134455!4d77.6073793!16s%%2Fg%%2F11swl478k1" rel="noopener" target="_blank">Open in Maps</a></div>
 <form class="card form reveal" id="form" novalidate>
 <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
-<label>Name<input name="name" required autocomplete="name"></label>
+<label>Name<input name="name" required autocomplete="name" maxlength="80"></label>
 <label>Work email<input name="email" type="email" required autocomplete="email"></label>
+<label>Mobile number<input name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="+91 98765 43210" maxlength="20"></label>
 <label>I'm interested in<select name="topic"><option>Cloud</option><option>Data &amp; BI</option><option>Development</option><option>Migration</option><option>DevOps</option><option>IT Talent</option><option>Wealth Management</option><option>Other</option></select></label>
-<label>Message<textarea name="msg" rows="4" required></textarea></label>
+<label>Message<textarea name="msg" rows="4" required maxlength="2000"></textarea></label>
 <button class="btn" type="submit">Send message</button><p class="note" id="note" role="status"></p></form></div>''' % (PHONE, EMAIL, EMAIL))
     page("contact.html", "Contact", "Contact NDR Infotech, BTM 2nd Stage, Bangalore.", "Get in <span class=\"grad\">touch</span>",
          "A short brief is all we need to start the conversation.", body, "Contact")

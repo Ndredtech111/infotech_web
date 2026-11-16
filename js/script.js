@@ -49,19 +49,30 @@
     var d = new FormData(form), btn = form.querySelector('button[type=submit]');
     note.style.color = '';
     if (d.get('_honey')) return;                                   // spam trap
+    var phoneDigits = String(d.get('phone') || '').replace(/\D/g, '');
     if (!d.get('name') || !/^\S+@\S+\.\S+$/.test(d.get('email')) || !d.get('msg')) {
       note.textContent = 'Please complete name, a valid email and message.'; return;
     }
+    if (!/^[+()\d\s-]+$/.test(String(d.get('phone') || '')) || phoneDigits.length < 7 || phoneDigits.length > 15) {
+      note.textContent = 'Please enter a valid mobile number (digits only, with an optional country code).'; return;
+    }
+    // no hyperlinks allowed in the name or message
+    var LINK = /(https?:\/\/|ftp:\/\/|www\.|<\s*a\b|href\s*=|\[url|\b[a-z0-9-]+\.(?:com|org|io|info|biz|xyz|ru|cn|top|site|online|link|click|shop|app|ly|tk|ml|ga|cf)\b|\b[a-z0-9-]+\.[a-z]{2,}\/\S*)/i;
+    function hasLink(v) { return LINK.test(String(v || '').replace(/[^\s@]+@[^\s@]+\.[^\s@]+/g, ' ')); }   // email addresses are fine
+    if (hasLink(d.get('name')) || hasLink(d.get('msg'))) {
+      note.style.color = '#b45309';
+      note.textContent = 'Links are not allowed in the name or message. Please remove any web addresses and try again.'; return;
+    }
     var label = btn.textContent; btn.disabled = true; btn.textContent = 'Sending…'; note.textContent = '';
     function mailtoFallback() {
-      var body = 'Name: ' + d.get('name') + '\nEmail: ' + d.get('email') + '\nInterest: ' + d.get('topic') + '\n\n' + d.get('msg');
+      var body = 'Name: ' + d.get('name') + '\nEmail: ' + d.get('email') + '\nMobile: ' + d.get('phone') + '\nInterest: ' + d.get('topic') + '\n\n' + d.get('msg');
       window.location.href = 'mailto:' + MAIL_TO + '?subject=' + encodeURIComponent('Website enquiry – ' + d.get('topic')) + '&body=' + encodeURIComponent(body);
     }
     fetch('https://formsubmit.co/ajax/' + MAIL_TO, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        name: d.get('name'), email: d.get('email'), interest: d.get('topic'), message: d.get('msg'),
+        name: d.get('name'), email: d.get('email'), mobile: d.get('phone'), interest: d.get('topic'), message: d.get('msg'),
         _subject: 'Website enquiry – ' + d.get('topic') + ' – ' + d.get('name'),
         _template: 'table', _captcha: 'false'
       })
