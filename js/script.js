@@ -43,6 +43,7 @@
   // Contact form: emails the enquiry to the address below via FormSubmit (https://formsubmit.co).
   // First submission triggers a one-time activation email to that inbox; click the link in it to enable delivery.
   var MAIL_TO = 'hr@ndrinfotech.com';
+  var MAIL_CC = 'dineshreddyvari@ndrinfotech.com';   // gets a copy of every enquiry
   var form = document.getElementById('form'), note = document.getElementById('note');
   if (form) form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -66,7 +67,7 @@
     var label = btn.textContent; btn.disabled = true; btn.textContent = 'Sending…'; note.textContent = '';
     function mailtoFallback() {
       var body = 'Name: ' + d.get('name') + '\nEmail: ' + d.get('email') + '\nMobile: ' + d.get('phone') + '\nInterest: ' + d.get('topic') + '\n\n' + d.get('msg');
-      window.location.href = 'mailto:' + MAIL_TO + '?subject=' + encodeURIComponent('Website enquiry – ' + d.get('topic')) + '&body=' + encodeURIComponent(body);
+      window.location.href = 'mailto:' + MAIL_TO + '?cc=' + encodeURIComponent(MAIL_CC) + '&subject=' + encodeURIComponent('Website enquiry – ' + d.get('topic')) + '&body=' + encodeURIComponent(body);
     }
     fetch('https://formsubmit.co/ajax/' + MAIL_TO, {
       method: 'POST',
@@ -74,7 +75,7 @@
       body: JSON.stringify({
         name: d.get('name'), email: d.get('email'), mobile: d.get('phone'), interest: d.get('topic'), message: d.get('msg'),
         _subject: 'Website enquiry – ' + d.get('topic') + ' – ' + d.get('name'),
-        _template: 'table', _captcha: 'false'
+        _cc: MAIL_CC, _template: 'table', _captcha: 'false'
       })
     }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok && j.success !== 'false' && j.success !== false, j: j }; }); })
       .then(function (res) {
