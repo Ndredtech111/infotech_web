@@ -1,2 +1,4 @@
 __pycache__/
 *.pyc
+# server secrets
+server/contact-api/config.php

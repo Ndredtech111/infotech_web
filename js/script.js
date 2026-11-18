@@ -40,10 +40,11 @@
 
   // copyright year is fixed (2022) in the footer markup
 
-  // Contact form: emails the enquiry to the address below via FormSubmit (https://formsubmit.co).
-  // First submission triggers a one-time activation email to that inbox; click the link in it to enable delivery.
+  // Contact form: posts to our own API on the GoDaddy hosting (server/contact-api/contact.php),
+  // which saves the enquiry to MySQL and emails the company inboxes.
+  var API_URL = 'https://api.ndrinfotech.com/contact.php';
   var MAIL_TO = 'hr@ndrinfotech.com';
-  var MAIL_CC = 'dineshreddyvari@ndrinfotech.com';   // gets a copy of every enquiry
+  var MAIL_CC = 'dineshreddyvari@ndrinfotech.com';   // used only by the email-app fallback
   var form = document.getElementById('form'), note = document.getElementById('note');
   if (form) form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -69,18 +70,33 @@
       var body = 'Name: ' + d.get('name') + '\nEmail: ' + d.get('email') + '\nMobile: ' + d.get('phone') + '\nInterest: ' + d.get('topic') + '\n\n' + d.get('msg');
       window.location.href = 'mailto:' + MAIL_TO + '?cc=' + encodeURIComponent(MAIL_CC) + '&subject=' + encodeURIComponent('Website enquiry – ' + d.get('topic')) + '&body=' + encodeURIComponent(body);
     }
-    fetch('https://formsubmit.co/ajax/' + MAIL_TO, {
+    var ctrl = ('AbortController' in window) ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 15000);   // never hang on "Sending…"
+    fetch(API_URL, {
       method: 'POST',
+      signal: ctrl ? ctrl.signal : undefined,
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        name: d.get('name'), email: d.get('email'), mobile: d.get('phone'), interest: d.get('topic'), message: d.get('msg'),
-        _subject: 'Website enquiry – ' + d.get('topic') + ' – ' + d.get('name'),
-        _cc: MAIL_CC, _template: 'table', _captcha: 'false'
+        name: d.get('name'), email: d.get('email'), phone: d.get('phone'), topic: d.get('topic'), msg: d.get('msg'),
+        _honey: d.get('_honey') || ''
       })
-    }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok && j.success !== 'false' && j.success !== false, j: j }; }); })
+    }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, ok: !!(r.ok && j.ok), j: j }; });
+      })
       .then(function (res) {
+        if (res.status === 429) {
+          note.style.color = '#b45309';
+          note.textContent = 'Too many messages from this device. Please try again later or call us.';
+          return;
+        }
+        if (res.status === 422) {
+          note.style.color = '#b45309';
+          note.textContent = 'Please check your details. Links are not allowed, and the email and mobile number must be valid.';
+          return;
+        }
         if (!res.ok) throw new Error('send failed');
         form.reset();
+        note.style.color = '';
         note.textContent = 'Thank you. Your message has been sent and we will get back to you soon.';
       })
       .catch(function () {
@@ -88,7 +104,7 @@
         note.textContent = 'We could not send this automatically, so we are opening your email app instead.';
         setTimeout(mailtoFallback, 900);
       })
-      .then(function () { btn.disabled = false; btn.textContent = label; });
+      .then(function () { clearTimeout(timer); btn.disabled = false; btn.textContent = label; });
   });
 })();
 

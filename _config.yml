@@ -1,0 +1,8 @@
+# GitHub Pages build settings
+exclude:
+  - server
+  - py
+  - docs
+  - Logo
+  - AUTHORS.md
+  - CONTRIBUTING.md
